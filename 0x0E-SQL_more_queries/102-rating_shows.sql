@@ -1,7 +1,8 @@
--- lists all shows from hbtn_0d_tvshows_rate by their rating
--- lists all rows of a table by the sum of a linked row
-SELECT title, SUM(tv_show_ratings.rate) 'rating'
-FROM tv_shows
-LEFT JOIN tv_show_ratings ON tv_show_ratings.show_id = tv_shows.id
-GROUP BY title
-ORDER BY rating DESC;
+-- Lists all shows from hbtn_0d_tvshows_rate by their rating.
+-- Records are ordered by descending rating.
+SELECT `title`, SUM(`rate`) AS `rating`
+  FROM `tv_shows` AS t
+       INNER JOIN `tv_show_ratings` AS r
+       ON t.`id` = r.`show_id`
+ GROUP BY `title`
+ ORDER BY `rating` DESC;

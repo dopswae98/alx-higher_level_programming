@@ -1,1 +1,1 @@
-# 0x14. Javascript - Web scraping
+Project 0x14-Javascript-web_scraping

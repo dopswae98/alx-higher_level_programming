@@ -1,3 +1,7 @@
--- lists all cities contained in the database hbtn_0d_usa
--- lists all rows of a particular column in a database
-SELECT cities.id, cities.name, states.name FROM cities LEFT JOIN states ON states.id = cities.state_id ORDER BY cities.id;
+-- Lists all cities in the database hbtn_0d_usa.
+-- Records are sorted in order of ascending cities.id.
+SELECT c.`id`, c.`name`, s.`name`
+  FROM `cities` AS c
+       INNER JOIN `states` AS s
+       ON c.`state_id` = s.`id`
+ ORDER BY c.`id`;

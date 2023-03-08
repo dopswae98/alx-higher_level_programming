@@ -1,8 +1,11 @@
 #!/usr/bin/node
-const list = require('./100-data').list;
-const newList = list.map(function (num, index) {
-  return num * index;
-});
+// script that imports an array and computes a new array
 
-console.log(list);
-console.log(newList);
+const array = require('./100-data').list;
+
+console.log(array);
+let cont = 0;
+const map1 = array.map(function (x) {
+  return (x * cont++);
+});
+console.log(map1);

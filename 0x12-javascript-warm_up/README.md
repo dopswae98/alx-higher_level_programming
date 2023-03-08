@@ -1,1 +1,1 @@
-#JavaScript
+Warming up for JavaScript projects
