@@ -1,20 +1,30 @@
 #!/usr/bin/python3
-''' a class Student that defines a student
-'''
+"""Module 11-student.
+Creates a Student class.
+"""
 
 
 class Student:
-    '''module class student
-    '''
+    """Class that defines a student.
+    Public attributes:
+        - first_name
+        - last_name
+        - age
+    Public method to_json().
+    """
 
     def __init__(self, first_name, last_name, age):
-        '''method __init__
-        '''
+        """Initializes the Student instance."""
+
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self):
-        '''method to_json
-        '''
+        """Retrieves a dictionary representation
+        of a Student instance.
+
+        Returns: the dict representation of the instance.
+        """
+
         return self.__dict__

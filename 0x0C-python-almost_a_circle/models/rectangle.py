@@ -1,140 +1,190 @@
 #!/usr/bin/python3
-'''
-    Class Rectangle
-'''
+"""
+Module rectangle
+"""
 from models.base import Base
 
 
 class Rectangle(Base):
-    '''
-        Defining the Rectangle class
-        Inherits from:
-            Base
-    '''
+    """
+    class Rectangle that inherits from Base
+
+    Class Rectangle inherits from Base
+    Private instance attributes, each with its own public getter and setter:
+    __width -> width
+    __height -> height
+    __x -> x
+    __y -> y
+    Class constructor: def __init__(self, width, height, x=0, y=0, id=None):
+    Call the super class with id - this super call with use the logic of the
+    __init__ of the Base class
+    Assign each argument width, height, x and y to the right attribute
+    """
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        self.width = width
-        self.height = height
-        self.x = x
-        self.y = y
-        super().__init__(id)
+        """
+        method to initialise the attributes
+        """
+        super(Rectangle, self).__init__(id)
+        self.__width = width
+        self.__height = height
+        self.__x = x
+        self.__y = y
 
     @property
     def width(self):
-        '''
-            Returning private attribute
-        '''
+        """
+        getter method for width
+        :return: width
+        """
         return self.__width
 
     @width.setter
-    def width(self, value):
-        '''
-            Setting private attribute
-        '''
-        self.setter_validation("width", value)
-        self.__width = value
+    def width(self, width):
+        """
+        setter method for width
+        :param width:
+        :return:
+        """
+        if not isinstance(width, int):
+            raise TypeError("width must be an integer")
+        elif width <= 0:
+            raise ValueError("width must be > 0")
+        else:
+            self.__width = width
 
     @property
     def height(self):
-        '''
-            Returning private attribute
-        '''
+        """
+        getter method for height
+        :return: height
+        """
         return self.__height
 
     @height.setter
-    def height(self, value):
-        '''
-            Setting private attribute
-        '''
-        self.setter_validation("height", value)
-        self.__height = value
+    def height(self, height):
+        """
+        setter method for height
+        :param height:
+        :return:
+        """
+        if not isinstance(height, int):
+            raise TypeError("height must be an integer")
+        elif height <= 0:
+            raise ValueError("height must be > 0")
+        else:
+            self.__height = height
 
     @property
     def x(self):
-        '''
-            Returning private attribute
-        '''
+        """
+        getter method for x
+        :return: x
+        """
         return self.__x
 
     @x.setter
-    def x(self, value):
-        '''
-            Setting private attribute
-        '''
-        self.setter_validation("x", value)
-        self.__x = value
+    def x(self, x):
+        """
+        setter method for x
+        :param x:
+        :return:
+        """
+        if not isinstance(x, int):
+            raise TypeError("x must be an integer")
+        elif x < 0:
+            raise ValueError("x must be >= 0")
+        else:
+            self.__x = x
 
     @property
     def y(self):
-        '''
-            Returning private attribute
-        '''
+        """
+        getter method for y
+        :return: y
+        """
         return self.__y
 
     @y.setter
-    def y(self, value):
-        '''
-            Setting private attribute
-        '''
-        self.setter_validation("y", value)
-        self.__y = value
+    def y(self, y):
+        """
+        setter method for y
+        :param y:
+        :return:
+        """
+        if not isinstance(y, int):
+            raise TypeError("y must be an integer")
+        elif y < 0:
+            raise ValueError("y must be >= 0")
+        else:
+            self.__y = y
 
     def area(self):
-        '''
-            Returns the area of the rectangle
-        '''
-        return (self.height * self.width)
+        """
+        method for returning area of a rectangle
+
+        Returns:
+            area
+        """
+        return self.__width * self.__height
 
     def display(self):
-        '''
-            Prints to stdout the representation of the rectangle
-        '''
-        rectangle = ""
-        print("\n" * self.y, end="")
-        for i in range(self.height):
-            rectangle += (" " * self.x) + ("#" * self.width) + "\n"
-        print(rectangle, end="")
-
-    def update(self, *args, **kwargs):
-        '''
-            Updates the arguments in the class
-        '''
-        if len(args) == 0:
-            for key, val in kwargs.items():
-                self.__setattr__(key, val)
-            return
-        try:
-            self.id = args[0]
-            self.width = args[1]
-            self.height = args[2]
-            self.x = args[3]
-            self.y = args[4]
-        except IndexError:
-            pass
-
-    def to_dictionary(self):
-        '''
-            Returns a dictionary representation of this class
-        '''
-        return {'x': getattr(self, "x"),
-                'y': getattr(self, "y"),
-                'id': getattr(self, "id"),
-                'height': getattr(self, "height"),
-                'width': getattr(self, "width")}
-
-    @staticmethod
-    def setter_validation(attribute, value):
-        if type(value) != int:
-            raise TypeError("{} must be an integer".format(attribute))
-        if attribute == "x" or attribute == "y":
-            if value < 0:
-                raise ValueError("{} must be >= 0".format(attribute))
-        elif value <= 0:
-            raise ValueError("{} must be > 0".format(attribute))
+        """
+        method that returns area with number of #
+        """
+        for i in range(self.__height):
+            for j in range(self.__width):
+                print("#", end='')
+            print()
 
     def __str__(self):
-        '''
-            Overwritting the str method
-        '''
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y,
-                                                       self.width, self.height)
+        """
+        method that overides Base __str__
+
+        Returns:
+
+        """
+        return "[Rectangle] ({}) {}/{} - {}/{}".\
+            format(self.id, self.__x, self.__y, self.__width, self.__height)
+
+    def update(self, *args, **kwargs):
+        """
+        method that updates dimensions
+        """
+        length = len(args)
+
+        if length > 0:
+            if length == 0:
+                pass
+            elif length == 1:
+                self.id = args[0]
+            elif length == 2:
+                self.id = args[0]
+                self.__width = args[1]
+            elif length == 3:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+            elif length == 4:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+                self.__x = args[3]
+            elif length == 5:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+                self.__x = args[3]
+                self.__y = args[4]
+        elif length == 0:
+            if "width" in kwargs:
+                self.__width = kwargs.get("width")
+            if "height" in kwargs:
+                self.__height = kwargs.get("height")
+            if "x" in kwargs:
+                self.__x = kwargs.get("x")
+            if "y" in kwargs:
+                self.__y = kwargs.get("y")
+            if "id" in kwargs:
+                self.id = kwargs.get("id")
+

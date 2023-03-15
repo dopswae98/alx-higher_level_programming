@@ -1,1 +1,1 @@
-0x05-python-exceptions
+Python exceptions project

@@ -1,1 +1,1 @@
-This directory contains introductory tasks to python.
+Hello world Python Project

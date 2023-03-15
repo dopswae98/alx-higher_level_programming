@@ -1,1 +1,1 @@
-0x06-python-classes
+Python object oriented project

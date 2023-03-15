@@ -1,1 +1,1 @@
-This directory contains if/else conditional codes
+Control flow project, if else and loops

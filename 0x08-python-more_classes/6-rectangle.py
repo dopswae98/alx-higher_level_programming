@@ -1,105 +1,114 @@
 #!/usr/bin/python3
-
-'''module: rectangle
-this module contains the class Rectangle ...
-'''
+"""Module 5-rectangle.py
+a class Rectangle that defines a rectangle by: (based on 4-rectangle.py)
+Private instance attribute: width:
+property def width(self): to retrieve it
+property setter def width(self, value): to set it:
+width must be an integer, otherwise raise a TypeError exception with the
+message width must be an integer
+if width is less than 0, raise a ValueError exception with the message width
+must be >= 0
+Private instance attribute: height:
+property def height(self): to retrieve it
+property setter def height(self, value): to set it:
+height must be an integer, otherwise raise a TypeError exception with the
+message height must be an integer
+if height is less than 0, raise a ValueError exception with the message
+height must be >= 0
+Public instance method: def area(self): that returns the rectangle area
+Public instance method: def perimeter(self): that returns the rectangle
+perimeter:
+if width or height is equal to 0, perimeter is equal to 0
+repr() should return a string representation of the rectangle to be able
+to recreate a new instance by using eval()
+"""
 
 
 class Rectangle:
-    '''class: Rectangle
-    this is Rectangle class
-    '''
+    """
+    with optional width and height: def __init__(self, width=0, height=0):
+    Attributes:
+           number_of_instances (int): it shows number of instances that is
+           currently available
+    """
 
     number_of_instances = 0
 
     def __init__(self, width=0, height=0):
-        '''method: __init__
-        initialize instance of class
-        '''
-        Rectangle.number_of_instances += 1
+        """Initializes a Rectangle instance.
+        Args:
+            width: width of the rectangle
+            height: height of the rectangle
+        """
         self.__width = width
         self.__height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
-        '''method: set_width
-        getter
-        '''
-        if (not isinstance(self.__width, int)) or isinstance(self.__width,
-                                                             bool):
-            raise TypeError("width must be an integer")
-        if self.__width < 0:
-            raise ValueError("width must be >= 0")
+        """Retrieves the width of a Rectangle instance."""
         return self.__width
 
     @width.setter
-    def width(self, width):
-        '''method set_width
-        '''
-        if not isinstance(self.__width, int) or isinstance(self.__width, bool):
+    def width(self, value):
+        """Sets the width of a Rectangle instance
+        Args:
+            value: value of the width, must be a positive integer
+        """
+        if not isinstance(self.__width, int):
             raise TypeError("width must be an integer")
-        if self.__width < 0:
+        elif self.__width < 0:
             raise ValueError("width must be >= 0")
-        self.__width = width
+        else:
+            self.__width = value
 
     @property
     def height(self):
-        '''method: set_height
-        getter
-        '''
-        if (not isinstance(self.__height, int)) or isinstance(self.__height,
-                                                              bool):
-            raise TypeError("height must be an integer")
-        if self.__height < 0:
-            raise ValueError("height must be >= 0")
+        """Retrieves the height of a Rectangle instance."""
         return self.__height
 
     @height.setter
-    def height(self, height):
-        '''setter
-        '''
-        if not isinstance(self.__height, int) or isinstance(self.__height,
-                                                            bool):
+    def height(self, value):
+        """Sets the height of a Rectangle instance
+        Args:
+            value: value of the height, must be a positive integer
+        """
+        if not isinstance(self.__height, int):
             raise TypeError("height must be an integer")
-        if self.__height < 0:
+        elif self.__height < 0:
             raise ValueError("height must be >= 0")
-        self.__height = height
+        else:
+            self.__height = value
 
     def area(self):
-        '''method area of rectangle
-        '''
+        """"Returns area of a rectangle"""
         return self.__height * self.__width
 
     def perimeter(self):
-        '''method return perimeter of perimeter
-        '''
-        if self.__height == 0 or self.width == 0:
+        """Returns perimeter if width amd height is not equal to zero"""
+        if self.__height == 0 or self.__width == 0:
             return 0
-        return (self.__height + self.width) * 2
+        else:
+            return (self.__width + self.__height) * 2
 
     def __str__(self):
-        '''method: __str__
-        return nice string rectangle
-        '''
-        ret_str = ""
+        """Returns a string of # if all dimensions are not equal to zer0"""
         if self.__height == 0 or self.__width == 0:
             return ""
-        for idx in range(self.__height):
-            ret_str += '#' * self.width
-            if idx + 1 < self.__height:
-                ret_str += '\n'
-        return ret_str
+        else:
+            rec_hash = ""
+            for i in range(self.__height):
+                for j in range(self.__width):
+                    rec_hash += "#"
+                rec_hash += "\n"
+            return rec_hash[:-1]
 
     def __repr__(self):
-        '''method: __repr__ create new object
-        '''
-        ret_str = "Rectangle(" + str(self.__width) + ","
-        ret_str += str(self.__height) + ")"
-        return ret_str
+        """Returns  Rectangle(width, height)"""
+        return "Rectangle({}, {})".format(self.__width, self.__height)
 
     def __del__(self):
-        '''method: __del__
-           deletes instance, prints "bye" message
-        '''
-        Rectangle.number_of_instances -= 1
+        """Print the message Bye rectangle... (... being 3 dots not ellipsis)
+         when an instance of Rectangle is deleted"""
         print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
